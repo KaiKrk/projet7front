@@ -2,9 +2,11 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Member} from '../models/member.model';
+import {environment} from '../../environments/environment.prod';
 
 @Injectable()
 export class MemberService {
+  endpoint: string =  environment.APIEndpoint;
   private member: Member[] = [];
   memberSubject = new Subject<any[]>();
 
@@ -20,7 +22,7 @@ export class MemberService {
 
   getMembers() {
     this.httpClient
-      .get<any[]>('http://localhost:8080/members')
+      .get<any[]>(this.endpoint + '/members')
       .subscribe(
         (response) => {
           this.members = response;
@@ -34,7 +36,7 @@ export class MemberService {
 
   saveMember(member: Member) {
     this.httpClient
-      .post('http://localhost:8080/saveMember', member)
+      .post(this.endpoint + '/saveMember', member)
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');

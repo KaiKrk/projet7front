@@ -2,9 +2,12 @@ import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Book} from '../models/book.model';
+import {environment} from '../../environments/environment.prod';
 
 @Injectable()
 export class BookService {
+
+  endpoint: string =  environment.APIEndpoint;
   private book: Book[] = [];
   bookSubject = new Subject<any[]>();
 
@@ -22,7 +25,7 @@ export class BookService {
 
   getBooks() {
     this.httpClient
-      .get<any[]>('http://localhost:8080/books')
+      .get<any[]>(this.endpoint + '/books')
       .subscribe(
         (response) => {
           this.books = response;
@@ -36,7 +39,7 @@ export class BookService {
 
   saveBooks(book: Book) {
     this.httpClient
-      .post('http://localhost:8080/saveBook', book)
+      .post(this.endpoint + '/saveBook', book)
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
