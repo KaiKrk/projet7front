@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Subscription} from 'rxjs';
+import {Booking} from '../models/booking.model';
+import {BookingService} from '../services/booking.service';
 
 @Component({
   selector: 'app-booking-personnal',
@@ -6,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booking-personal.component.scss']
 })
 export class BookingPersonalComponent implements OnInit {
+  bookings: any[];
+  bookingsSubscription: Subscription;
 
-  constructor() { }
+  constructor(private bookingService: BookingService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.bookingService.getBooking();
+    this.bookingsSubscription = this.bookingService.bookingSubject.subscribe(
+      (bookings: any[]) => {
+        this.bookings = bookings;
+      }
+    );
+    this.bookingService.emitBookSubject();
   }
+
+  onSave(booking: Booking ) {
+    this.bookingService.saveBooking(booking);
+  }
+
 
 }

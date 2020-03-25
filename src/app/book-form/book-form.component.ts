@@ -31,7 +31,7 @@ export class BookFormComponent implements OnInit {
       }
     );
   }
-  onSubmitForm() {
+  onSubmitBookForm() {
     const formValue =  this.bookForm.value;
     const newBook = new Book(
       formValue.name,

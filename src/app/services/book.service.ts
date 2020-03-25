@@ -43,8 +43,6 @@ export class BookService {
           console.log('Erreur ! : ' + error);
         }
       );
-    console.log('2');
-    console.log(book);
   }
 
   constructor(private httpClient: HttpClient) {

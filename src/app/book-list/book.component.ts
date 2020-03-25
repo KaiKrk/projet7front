@@ -24,9 +24,6 @@ export class BookComponent implements OnInit {
     this.bookService.emitBookSubject();
   }
 
-  onSave(book: Book ) {
-    this.bookService.saveBooks(book);
-  }
 
 
 }

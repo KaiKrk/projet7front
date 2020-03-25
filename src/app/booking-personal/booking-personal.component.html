@@ -1,1 +1,19 @@
 <p>booking-personnal works!</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Nom du Livre</th>
+    <th scope="col">Auteur</th>
+    <th scope="col">Categorie</th>
+    <th scope="col">Nombre D'Exemplaire</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of bookings">
+    <td>{{book.book}}</td>
+    <td>{{book.member}}</td>
+    <td>{{book.borrowingDate}}</td>
+    <td>{{book.returnDate}}</td>
+  </tr>
+  </tbody>
+</table>

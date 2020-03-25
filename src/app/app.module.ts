@@ -23,6 +23,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {BookService} from './services/book.service';
 import {HttpClient} from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import {MemberService} from './services/member.service';
+import {BookingService} from './services/booking.service';
 
 const appRoutes: Routes = [
   { path: 'bookForm', component: BookFormComponent},
@@ -59,7 +61,7 @@ const appRoutes: Routes = [
     NgbCollapseModule,
     ReactiveFormsModule,
   ],
-  providers: [BookService,
+  providers: [BookService, MemberService, BookingService,
   HttpClient],
   bootstrap: [AppComponent]
 })
