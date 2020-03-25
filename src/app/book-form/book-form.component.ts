@@ -33,14 +33,13 @@ export class BookFormComponent implements OnInit {
   }
   onSubmitBookForm() {
     const formValue =  this.bookForm.value;
-    const newBook = new Book(
-      formValue.name,
-      formValue.author,
-      formValue.category,
-      formValue.copies,
-    );
-    console.log(newBook);
-    this.bookService.addBook(newBook);
+    const book: Book = {
+      author: formValue.author,
+      category: formValue.category,
+      copies: formValue.copies,
+      name: formValue.name
+    }
+    this.bookService.addBook(book);
     this.router.navigate(['/bookList']);
   }
 }

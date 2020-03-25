@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Book} from '../models/book.model';
@@ -11,14 +11,16 @@ export class BookService {
   private books = [] ;
 
   emitBookSubject() {
+    console.log(typeof this.books)
     this.bookSubject.next(this.books.slice());
   }
   addBook(book: Book) {
   // this.book.push(book);
   this.saveBooks(book);
+  // this.emitBookSubject();
   }
 
-  getBook() {
+  getBooks() {
     this.httpClient
       .get<any[]>('http://localhost:8080/books')
       .subscribe(

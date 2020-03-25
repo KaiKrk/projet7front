@@ -34,15 +34,7 @@ export class MemberFormComponent implements OnInit {
   }
   onSubmitForm() {
     const formValue =  this.memberForm.value;
-    const newMember = new Member(
-      formValue.name,
-      formValue.surname,
-      formValue.email,
-      formValue.password,
-    );
-    console.log(newMember);
-    // this.memberService.addMember(newMember);
-    // this.router.navigate(['/']);
+    console.log(formValue.name, formValue.surname, formValue.email, formValue.password);
   }
 
 }

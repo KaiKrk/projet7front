@@ -1,18 +1,27 @@
+<h3>Nos Livres</h3>
 <table class="table table-striped">
+
   <thead>
   <tr>
+    <th scope="col">Identifiant du livre</th>
     <th scope="col">Nom du Livre</th>
     <th scope="col">Auteur</th>
     <th scope="col">Categorie</th>
     <th scope="col">Nombre D'Exemplaire</th>
+    <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let book of books">
-  <td>{{book.name}}</td>
-  <td>{{book.author}}</td>
-  <td>{{book.category}}</td>
-  <td>{{book.copies}}</td>
+    <td>{{book.id}}</td>
+    <td>{{book.name}}</td>
+    <td>{{book.author}}</td>
+    <td>{{book.category}}</td>
+    <td>{{book.copies}}</td>
+    <td>
+      <a class="btn btn-info" href="/bookDetail" >Detail</a>
+      <a class="btn btn-warning ml-1" href="/bookDetail" >Reserver</a>
+   </td>
   </tr>
   </tbody>
 </table>

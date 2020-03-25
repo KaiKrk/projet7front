@@ -1,1 +1,19 @@
 <p>member-list works!</p>
+<h3>Nos Membres</h3>
+<table class="table table-striped">
+
+  <thead>
+  <tr>
+    <th scope="col">Nom de Famille</th>
+    <th scope="col">Prenom</th>
+    <th scope="col">Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let member of members">
+    <td>{{member.name}}</td>
+    <td>{{member.surname}}</td>
+    <td>{{member.email}}</td>
+  </tr>
+  </tbody>
+</table>

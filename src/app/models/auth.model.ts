@@ -1,5 +1,4 @@
-export class AuthModel {
-  constructor(private username: string, private password: string) {
-
-  }
+export interface AuthModel {
+   username: string;
+   password: string;
 }

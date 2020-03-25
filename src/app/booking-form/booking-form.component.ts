@@ -34,10 +34,10 @@ export class BookingFormComponent implements OnInit {
   }
   onSubmitForm() {
     const formValue =  this.bookingForm.value;
-    const newBooking = new Booking(
-      formValue.book,
-      formValue.member
-    );
+    const newBooking: Booking = {
+      book: formValue.book,
+      member: formValue.member
+    }
     console.log(newBooking);
     this.bookingService.addBooking(newBooking);
     this.router.navigate(['/']);

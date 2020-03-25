@@ -1,7 +1,7 @@
-export class Book {
-constructor(public name: string,
-            public author: string,
-            public category: string,
-            public copies: number) {
-}
+export interface Book {
+   name: string;
+   author: string;
+   category: string;
+   copies: number;
+
 }

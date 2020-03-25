@@ -11,6 +11,7 @@ export class MemberService {
   private members = [] ;
 
   emitMemberSubject() {
+    console.log(this.members)
     this.memberSubject.next(this.members.slice());
   }
   addMember(member: Member) {
