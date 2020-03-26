@@ -26,8 +26,9 @@ endpoint: string =  environment.APIEndpoint;
   // }
   private currentUserSubject: BehaviorSubject<Member>;
   public currentUser: Observable<Member>;
+  public member;
 
-  constructor(private http: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<Member>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -36,14 +37,35 @@ endpoint: string =  environment.APIEndpoint;
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
-    return this.http.post<any>(this.endpoint + '/authenticate', { email, password })
-      .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
+  emitMemberSubject() {
+    this.currentUserSubject.next(this.member);
+  }
+
+  login(username: string, password: string) {
+    console.log('auth ' + username, password);
+    this.httpClient
+      .post<any>('http://localhost:8080/authenticate', { username, password })
+      .subscribe(
+        (response) => {
+          this.member = response;
+          localStorage.setItem('currentUser', JSON.stringify(this.member));
+          this.emitMemberSubject();
+          console.log(localStorage.getItem('currentUser'));
+          console.log('Connection !');
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+      // .pipe(map(member => {
+      //   console.log('b');
+      //   // store user details and jwt token in local storage to keep user logged in between page refreshes
+      //   localStorage.setItem('currentUser', JSON.stringify(member));
+      //   this.currentUserSubject.next(member);
+      //   console.log(this.currentUserSubject);
+      //   return member;
+      // }
+      // ))
   }
 
   logout() {

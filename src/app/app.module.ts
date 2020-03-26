@@ -25,6 +25,7 @@ import {HttpClient} from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import {MemberService} from './services/member.service';
 import {BookingService} from './services/booking.service';
+import {AuthService} from './services/auth.service';
 
 const appRoutes: Routes = [
   { path: 'bookForm', component: BookFormComponent},
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
     NgbCollapseModule,
     ReactiveFormsModule,
   ],
-  providers: [BookService, MemberService, BookingService,
+  providers: [BookService, MemberService, BookingService, AuthService,
   HttpClient],
   bootstrap: [AppComponent]
 })
