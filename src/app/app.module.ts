@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'bookForm', component: BookFormComponent},
   { path: 'bookList', component: BookComponent  },
   { path: 'bookDetail', component: BookDetailComponent  },
-  { path: 'bookingForm', component: BookingFormComponent  },
+  { path: 'bookingForm/:bookId', component: BookingFormComponent  },
   { path: 'myBooking', component: BookingPersonalComponent  },
   { path: 'memberForm', component: MemberFormComponent },
   { path: 'memberList', component: MemberListComponent  },

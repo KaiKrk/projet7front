@@ -20,7 +20,10 @@
     <td>{{book.copies}}</td>
     <td>
       <a class="btn btn-info" href="/bookDetail" >Detail</a>
-      <a class="btn btn-warning ml-1" href="/bookDetail" >Reserver</a>
+      <div *ngIf="book.copies > 0">
+        <a class="btn btn-warning mt-1" [routerLink]="['../bookingForm', book.id ]" >Reserver</a>
+      </div>
+
    </td>
   </tr>
   </tbody>

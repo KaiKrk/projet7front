@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Member} from '../models/member.model';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment.prod';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ endpoint: string =  environment.APIEndpoint;
   public currentUser: Observable<Member>;
   public member;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<Member>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -52,6 +53,7 @@ endpoint: string =  environment.APIEndpoint;
           this.emitMemberSubject();
           console.log(localStorage.getItem('currentUser'));
           console.log('Connection !');
+          this.router.navigate(['../bookList']);
         },
         (error) => {
           console.log('Erreur ! : ' + error);

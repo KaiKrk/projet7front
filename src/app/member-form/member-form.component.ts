@@ -10,8 +10,6 @@ import {Member} from '../models/member.model';
   styleUrls: ['./member-form.component.scss']
 })
 export class MemberFormComponent implements OnInit {
-
-
   memberForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,

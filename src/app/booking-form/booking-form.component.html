@@ -1,11 +1,11 @@
 <p>booking-form works!</p>
 <form [formGroup]="bookingForm" (ngSubmit)="onSubmitForm()">
   <div class="form-group">
-    <label for="book">Livre</label>
+    <label for="book">Identifiant du Livre</label>
     <input type="text" class="form-control" id="book" formControlName="book">
   </div>
   <div class="form-group">
-    <label for="member">Membre</label>
+    <label for="member">Votre Identifiant </label>
     <input type="text" class="form-control" id="member" formControlName="member">
   </div>
   <button class="btn btn-primary" type="submit" [disabled]="bookingForm.invalid">Soumettre</button>

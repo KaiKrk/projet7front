@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MemberService} from '../services/member.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Booking} from '../models/booking.model';
 import {BookingService} from '../services/booking.service';
+import {Book} from '../models/book.model';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-booking-form',
@@ -12,31 +14,38 @@ import {BookingService} from '../services/booking.service';
 })
 export class BookingFormComponent implements OnInit {
 
-
-
-  bookingForm: FormGroup;
-
   constructor(private formBuilder: FormBuilder,
               private bookingService: BookingService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService,
+              private activeRoute: ActivatedRoute) { }
+
+  private id: string;
+  private memberId: number;
+
+  currentUser = this.authService.currentUserValue;
+  bookingForm: FormGroup;
+
 
   ngOnInit(): void {
+    this.id = this.activeRoute.snapshot.paramMap.get('bookId');
+    this.memberId = this.currentUser.id;
     this.initForm();
   }
 
   initForm() {
     this.bookingForm = this.formBuilder.group(
       {
-        book: ['', Validators.required],
-        member: ['', Validators.required],
+        book: [this.id, Validators.required],
+        member: [this.memberId, Validators.required],
       }
     );
   }
   onSubmitForm() {
     const formValue =  this.bookingForm.value;
     const newBooking: Booking = {
-      book: formValue.book,
-      member: formValue.member
+      bookId: formValue.book,
+      memberId: formValue.member
     }
     console.log(newBooking);
     this.bookingService.addBooking(newBooking);
