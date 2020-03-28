@@ -7,15 +7,19 @@
     <th scope="col">Categorie</th>
     <th scope="col">Date D'emprunt</th>
     <th scope="col">Date de Retour</th>
+    <th scope="col">Renouvelable</th>
+    <th scope="col">Statut de la Reservation</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let book of bookings">
-    <td>{{book.book}}</td>
-    <td>{{book.member}}</td>
-    <td>{{book.category}}</td>
-    <td>{{book.borrowingDate}}</td>
-    <td>{{book.returnDate}}</td>
+  <tr *ngFor="let booking of bookings">
+    <td>{{booking.book.name}}</td>
+    <td>{{booking.book.author}}</td>
+    <td>{{booking.book.category}}</td>
+    <td>{{booking.borrowingDate}}</td>
+    <td>{{booking.returnDate}}</td>
+    <td>{{booking.renewable}}</td>
+    <td>{{booking.status}}</td>
   </tr>
   </tbody>
 </table>

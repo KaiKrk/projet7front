@@ -14,7 +14,7 @@ export class BookService {
   private books = [] ;
 
   emitBookSubject() {
-    console.log(typeof this.books)
+    console.log( this.books)
     this.bookSubject.next(this.books.slice());
   }
   addBook(book: Book) {
@@ -32,7 +32,7 @@ export class BookService {
           this.emitBookSubject();
         },
         (error) => {
-          console.log('Erreur ! : ' + error);
+            console.log('Erreur ! : ' + error);
         }
       );
   }

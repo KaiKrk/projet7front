@@ -10,8 +10,6 @@ export class BookingService {
 
   endpoint: string =  environment.APIEndpoint;
 
-
-
   private booking: Booking[] = [];
   bookingSubject = new Subject<any[]>();
 
@@ -24,12 +22,12 @@ export class BookingService {
     this.saveBooking(booking);
   }
 
-  getBooking(email: string) {
+    getBooking(memberId: number) {
     this.httpClient
-      .post<any[]>(this.endpoint + '/bookings', {email})
+      .post<any[]>(this.endpoint + '/myBookings', {memberId})
       .subscribe(
         (response) => {
-          this.booking = response;
+          this.bookings = response;
           this.emitBookSubject();
         },
         (error) => {
