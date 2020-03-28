@@ -20,7 +20,7 @@ export class BookingFormComponent implements OnInit {
               private authService: AuthService,
               private activeRoute: ActivatedRoute) { }
 
-  private id: string;
+  private id: number;
   private memberId: number;
 
   currentUser = this.authService.currentUserValue;
@@ -28,7 +28,7 @@ export class BookingFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.id = this.activeRoute.snapshot.paramMap.get('bookId');
+    this.id = Number(this.activeRoute.snapshot.paramMap.get('bookId'));
     this.memberId = this.currentUser.id;
     this.initForm();
   }
@@ -46,7 +46,8 @@ export class BookingFormComponent implements OnInit {
     const newBooking: Booking = {
       bookId: formValue.book,
       memberId: formValue.member
-    }
+    };
+    console.log('avant');
     console.log(newBooking);
     this.bookingService.addBooking(newBooking);
     this.router.navigate(['/']);
