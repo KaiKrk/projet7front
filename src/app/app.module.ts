@@ -1,43 +1,46 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppComponent } from './app.component';
-import { BookComponent } from './book-list/book.component';
-import { Routes } from '@angular/router';
+import {AppComponent} from './app.component';
+import {BookComponent} from './book-list/book.component';
+import {Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import { BookFormComponent } from './book-form/book-form.component';
-import { BookDetailComponent } from './book-detail/book-detail.component';
-import { BookingFormComponent } from './booking-form/booking-form.component';
-import { MemberListComponent } from './member-list/member-list.component';
-import { MemberFormComponent } from './member-form/member-form.component';
-import { BookingPersonalComponent } from './booking-personal/booking-personal.component';
-import { MemberDetailComponent } from './member-detail/member-detail.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {BookFormComponent} from './book-form/book-form.component';
+import {BookDetailComponent} from './book-detail/book-detail.component';
+import {BookingFormComponent} from './booking-form/booking-form.component';
+import {MemberListComponent} from './member-list/member-list.component';
+import {MemberFormComponent} from './member-form/member-form.component';
+import {BookingPersonalComponent} from './booking-personal/booking-personal.component';
+import {MemberDetailComponent} from './member-detail/member-detail.component';
+import {AuthenticationComponent} from './authentication/authentication.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BookService} from './services/book.service';
 import {HttpClient} from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {MemberService} from './services/member.service';
 import {BookingService} from './services/booking.service';
 import {AuthService} from './services/auth.service';
+import {WelcomeComponent} from './welcome/welcome.component';
 
 const appRoutes: Routes = [
-  { path: 'bookForm', component: BookFormComponent},
-  { path: 'bookList', component: BookComponent  },
-  { path: 'bookDetail', component: BookDetailComponent  },
-  { path: 'bookingForm/:bookId', component: BookingFormComponent  },
-  { path: 'myBooking', component: BookingPersonalComponent  },
-  { path: 'memberForm', component: MemberFormComponent },
-  { path: 'memberList', component: MemberListComponent  },
-  { path: 'memberDetail', component: MemberDetailComponent },
-  { path: 'authentication', component: AuthenticationComponent },
+  {path: '', component: WelcomeComponent},
+  {path: 'bookForm', component: BookFormComponent},
+  {path: 'bookList', component: BookComponent},
+  {path: 'bookDetail', component: BookDetailComponent},
+  {path: 'bookingForm/:bookId/:bookName', component: BookingFormComponent},
+  {path: 'myBooking', component: BookingPersonalComponent},
+  {path: 'memberForm', component: MemberFormComponent},
+  {path: 'memberList', component: MemberListComponent},
+  {path: 'memberDetail', component: MemberDetailComponent},
+  {path: 'authentication', component: AuthenticationComponent},
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,12 +53,13 @@ const appRoutes: Routes = [
     BookingPersonalComponent,
     MemberDetailComponent,
     AuthenticationComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     FontAwesomeModule,
     HttpClientModule,
     BsDropdownModule.forRoot(),
@@ -63,7 +67,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [BookService, MemberService, BookingService, AuthService,
-  HttpClient],
+    HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule {

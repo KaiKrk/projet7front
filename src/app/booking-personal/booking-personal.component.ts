@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {Booking} from '../models/booking.model';
 import {BookingService} from '../services/booking.service';
 import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-booking-personnal',
@@ -14,9 +16,14 @@ export class BookingPersonalComponent implements OnInit {
   bookingsSubscription: Subscription;
   private name: string;
 
-  constructor(private bookingService: BookingService, private authenticationService: AuthService) { }
+  faCheck = faCheck;
+  faTimes = faTimes;
 
-   currentUser = this.authenticationService.currentUserValue;
+  constructor(private bookingService: BookingService, private authenticationService: AuthService, private router: Router) {
+  }
+
+  currentUser = this.authenticationService.currentUserValue;
+
   ngOnInit() {
     this.bookingService.getBooking(this.currentUser.id);
     console.log(this.currentUser.id);
@@ -25,11 +32,16 @@ export class BookingPersonalComponent implements OnInit {
         this.bookings = bookings;
       }
     );
-    this.bookingService.emitBookSubject();
+    this.bookingService.emitBookingSubject();
   }
 
-  onSave(booking: Booking ) {
+  onSave(booking: Booking) {
     this.bookingService.saveBooking(booking);
+  }
+
+  extend(booking: Booking) {
+    this.bookingService.extendBooking(booking);
+    window.location.reload();
   }
 
 

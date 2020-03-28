@@ -15,7 +15,7 @@ export class BookingService {
 
   private bookings = [] ;
 
-  emitBookSubject() {
+  emitBookingSubject() {
     this.bookingSubject.next(this.bookings.slice());
   }
   addBooking(booking: Booking) {
@@ -28,7 +28,7 @@ export class BookingService {
       .subscribe(
         (response) => {
           this.bookings = response;
-          this.emitBookSubject();
+          this.emitBookingSubject();
         },
         (error) => {
           console.log('Erreur ! : ' + error);
@@ -42,6 +42,20 @@ export class BookingService {
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log(booking);
+          console.log('Erreur ! : ' + error);
+        }
+      );
+  }
+
+  extendBooking(booking: Booking) {
+    this.httpClient
+      .post( this.endpoint + '/extendBooking', booking)
+      .subscribe(
+        () => {
+          console.log('Renouvellement terminé !');
         },
         (error) => {
           console.log(booking);

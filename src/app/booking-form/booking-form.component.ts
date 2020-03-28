@@ -22,6 +22,7 @@ export class BookingFormComponent implements OnInit {
 
   private id: number;
   private memberId: number;
+  public bookName: string;
 
   currentUser = this.authService.currentUserValue;
   bookingForm: FormGroup;
@@ -29,6 +30,7 @@ export class BookingFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number(this.activeRoute.snapshot.paramMap.get('bookId'));
+    this.bookName = this.activeRoute.snapshot.paramMap.get('bookName');
     this.memberId = this.currentUser.id;
     this.initForm();
   }
