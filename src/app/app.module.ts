@@ -17,28 +17,30 @@ import {BookingFormComponent} from './booking-form/booking-form.component';
 import {MemberListComponent} from './member-list/member-list.component';
 import {MemberFormComponent} from './member-form/member-form.component';
 import {BookingPersonalComponent} from './booking-personal/booking-personal.component';
-import {MemberDetailComponent} from './member-detail/member-detail.component';
 import {AuthenticationComponent} from './authentication/authentication.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BookService} from './services/book.service';
 import {HttpClient} from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MemberService} from './services/member.service';
 import {BookingService} from './services/booking.service';
 import {AuthService} from './services/auth.service';
 import {WelcomeComponent} from './welcome/welcome.component';
+import { AdminSpaceComponent } from './admin-space/admin-space.component';
+import {AuthGuard} from './services/auth-guard.service';
+import {JwtInterceptor} from './helpers/jwt.interceptor';
 
 const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
-  {path: 'bookForm', component: BookFormComponent},
-  {path: 'bookList', component: BookComponent},
+  {path: 'bookForm', canActivate: [AuthGuard], component: BookFormComponent},
+  {path: 'bookList', canActivate: [AuthGuard], component: BookComponent},
   {path: 'bookDetail', component: BookDetailComponent},
   {path: 'bookingForm/:bookId/:bookName', component: BookingFormComponent},
   {path: 'myBooking', component: BookingPersonalComponent},
   {path: 'memberForm', component: MemberFormComponent},
-  {path: 'memberList', component: MemberListComponent},
-  {path: 'memberDetail', component: MemberDetailComponent},
+  {path: 'memberList', canActivate: [AuthGuard], component: MemberListComponent},
   {path: 'authentication', component: AuthenticationComponent},
+  {path: 'adminSpace', canActivate: [AuthGuard], component: AdminSpaceComponent}
 ];
 
 @NgModule({
@@ -51,9 +53,9 @@ const appRoutes: Routes = [
     MemberListComponent,
     MemberFormComponent,
     BookingPersonalComponent,
-    MemberDetailComponent,
     AuthenticationComponent,
     WelcomeComponent,
+    AdminSpaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,8 +68,9 @@ const appRoutes: Routes = [
     NgbCollapseModule,
     ReactiveFormsModule,
   ],
-  providers: [BookService, MemberService, BookingService, AuthService,
-    HttpClient],
+  providers: [BookService, MemberService, BookingService, AuthService, AuthGuard,
+    HttpClient,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

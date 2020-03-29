@@ -5,4 +5,5 @@ export interface Member {
   email: string;
   password: string;
   token?: string;
+  admin?: boolean;
 }

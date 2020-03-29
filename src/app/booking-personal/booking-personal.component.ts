@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 export class BookingPersonalComponent implements OnInit {
   bookings: any[];
   bookingsSubscription: Subscription;
+
   private name: string;
 
   faCheck = faCheck;
