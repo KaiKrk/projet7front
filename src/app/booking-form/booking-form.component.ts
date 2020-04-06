@@ -49,8 +49,6 @@ export class BookingFormComponent implements OnInit {
       bookId: formValue.book,
       memberId: formValue.member
     };
-    console.log('avant');
-    console.log(newBooking);
     this.bookingService.addBooking(newBooking);
     this.router.navigate(['/']);
   }

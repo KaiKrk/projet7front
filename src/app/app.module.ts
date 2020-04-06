@@ -12,7 +12,6 @@ import {Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {BookFormComponent} from './book-form/book-form.component';
-import {BookDetailComponent} from './book-detail/book-detail.component';
 import {BookingFormComponent} from './booking-form/booking-form.component';
 import {MemberListComponent} from './member-list/member-list.component';
 import {MemberFormComponent} from './member-form/member-form.component';
@@ -34,7 +33,6 @@ const appRoutes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'bookForm', canActivate: [AuthGuard], component: BookFormComponent},
   {path: 'bookList', canActivate: [AuthGuard], component: BookComponent},
-  {path: 'bookDetail', component: BookDetailComponent},
   {path: 'bookingForm/:bookId/:bookName', component: BookingFormComponent},
   {path: 'myBooking', component: BookingPersonalComponent},
   {path: 'memberForm', component: MemberFormComponent},
@@ -48,7 +46,6 @@ const appRoutes: Routes = [
     AppComponent,
     BookComponent,
     BookFormComponent,
-    BookDetailComponent,
     BookingFormComponent,
     MemberListComponent,
     MemberFormComponent,

@@ -1,6 +1,11 @@
-<div class="card mt-5" style="background-color: #F5F5DC">
+<div class="card mt-5" >
+  <div class="card-header">Ajouter une Reference</div>
+  <div class="card-body">
+    <a class="btn btn-success" [routerLink]="'../bookForm'">Ajouter un Livre</a>
+  </div>
   <div class="card-header">Toutes Les Reservations</div>
   <div class="card-body">
+    <div class="table-responsive">
     <table class="table table-striped">
       <thead>
       <tr>
@@ -28,5 +33,6 @@
       </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>

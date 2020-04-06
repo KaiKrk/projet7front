@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Member} from '../models/member.model';
 import {environment} from '../../environments/environment.prod';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class MemberService {
@@ -12,8 +13,10 @@ export class MemberService {
 
   private members = [] ;
 
+  constructor(private httpClient: HttpClient, private router: Router) {
+  }
+
   emitMemberSubject() {
-    console.log(this.members)
     this.memberSubject.next(this.members.slice());
   }
   addMember(member: Member) {
@@ -40,6 +43,7 @@ export class MemberService {
       .subscribe(
         () => {
           console.log('Enregistrement terminé !');
+          this.router.navigate(['../c']);
         },
         (error) => {
           console.log('Erreur ! : ' + error);
@@ -47,6 +51,5 @@ export class MemberService {
       );
   }
 
-  constructor(private httpClient: HttpClient) {
-  }
+
 }

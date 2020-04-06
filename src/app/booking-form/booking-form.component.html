@@ -1,4 +1,4 @@
-<div class="card mt-5" style="background-color: #F5F5DC">
+<div class="card mt-5" >
   <div class="card-header">Reservation</div>
   <div class="card-body">
     <p>Reservation du Livre : {{bookName}} pour une durée d'un mois</p>
@@ -9,7 +9,7 @@
   <div class="form-group">
     <input type="text" class="form-control" id="member" formControlName="member" readonly hidden>
   </div>
-  <button class="btn border-light" style="background-color: #DBF6C9" type="submit" [disabled]="bookingForm.invalid">Confirmer la Reservation</button>
+  <button class="btn border-light btn-success"  type="submit" [disabled]="bookingForm.invalid">Confirmer la Reservation</button>
 </form>
   </div>
 </div>

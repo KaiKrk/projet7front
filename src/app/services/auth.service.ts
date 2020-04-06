@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {AuthModel} from '../models/auth.model';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Member} from '../models/member.model';
-import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment.prod';
 import {Router} from '@angular/router';
 
@@ -12,19 +10,6 @@ export class AuthService {
 
 endpoint: string =  environment.APIEndpoint;
 
-  // connect(auth: AuthModel) {
-  // this.httpClient
-  //   .post('http://localhost:8080/authenticate', auth)
-  //   .subscribe(
-  //     (response) => {
-  //
-  //       console.log('Enregistrement terminé !');
-  //     },
-  //     (error) => {
-  //       console.log('Erreur ! : ' + error);
-  //     }
-  //   );
-  // }
   private currentUserSubject: BehaviorSubject<Member>;
   public currentUser: Observable<Member>;
   public member;
@@ -43,15 +28,13 @@ endpoint: string =  environment.APIEndpoint;
   }
 
   login(username: string, password: string) {
-    console.log('auth ' + username, password);
     this.httpClient
-      .post<any>('http://localhost:8080/authenticate', { username, password })
+      .post<any>(this.endpoint + '/authenticate', { username, password })
       .subscribe(
         (response) => {
           this.member = response;
           localStorage.setItem('currentUser', JSON.stringify(this.member));
           this.emitMemberSubject();
-          console.log(localStorage.getItem('currentUser'));
           console.log('Connection !');
           this.router.navigate(['../bookList']);
         },
@@ -59,15 +42,6 @@ endpoint: string =  environment.APIEndpoint;
           console.log('Erreur ! : ' + error);
         }
       );
-      // .pipe(map(member => {
-      //   console.log('b');
-      //   // store user details and jwt token in local storage to keep user logged in between page refreshes
-      //   localStorage.setItem('currentUser', JSON.stringify(member));
-      //   this.currentUserSubject.next(member);
-      //   console.log(this.currentUserSubject);
-      //   return member;
-      // }
-      // ))
   }
 
   logout() {

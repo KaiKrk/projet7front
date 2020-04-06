@@ -14,7 +14,6 @@ export class BookService {
   private books = [] ;
 
   emitBookSubject() {
-    console.log( this.books)
     this.bookSubject.next(this.books.slice());
   }
   addBook(book: Book) {

@@ -27,7 +27,6 @@ export class BookingPersonalComponent implements OnInit {
 
   ngOnInit() {
     this.bookingService.getBooking(this.currentUser.id);
-    console.log(this.currentUser.id);
     this.bookingsSubscription = this.bookingService.bookingSubject.subscribe(
       (bookings: any[]) => {
         this.bookings = bookings;

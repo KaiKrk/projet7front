@@ -64,7 +64,6 @@ export class BookingService {
           console.log('Enregistrement terminé !');
         },
         (error) => {
-          console.log(booking);
           console.log('Erreur ! : ' + error);
         }
       );
@@ -78,7 +77,6 @@ export class BookingService {
           console.log('Renouvellement terminé !');
         },
         (error) => {
-          console.log(booking);
           console.log('Erreur ! : ' + error);
         }
       );
